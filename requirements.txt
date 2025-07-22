@@ -1,0 +1,6 @@
+ccxt
+ta
+pandas
+matplotlib
+requests
+flask
