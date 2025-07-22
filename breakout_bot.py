@@ -75,13 +75,15 @@ def plot_chart(df, symbol):
 
 def send_to_discord(symbol, price, chart_buf):
     files = {"file": (f"{symbol}.png", chart_buf, "image/png")}
-    data = {
-        "content": f"🚨 **Tín hiệu Breakout phát hiện trên {symbol}**
-💰 Giá hiện tại: `{price}` USDT
-📈 RSI tăng và volume vượt mức trung bình
-🎯 Thời điểm: {datetime.now().strftime('%H:%M:%S %d-%m-%Y')}"
-    }
+    content = (
+        f"🚨 **Tín hiệu Breakout phát hiện trên {symbol}**\n"
+        f"💰 Giá hiện tại: `{price}` USDT\n"
+        f"📈 RSI tăng và volume vượt mức trung bình\n"
+        f"🎯 Thời điểm: {datetime.now().strftime('%H:%M:%S %d-%m-%Y')}"
+    )
+    data = {"content": content}
     requests.post(WEBHOOK_URL, data=data, files=files)
+
 
 def run_bot():
     markets = exchange.load_markets()
